@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost:3306
--- Време на генериране: 26 дек 2022 в 01:17
--- Версия на сървъра: 10.3.36-MariaDB-log-cll-lve
--- Версия на PHP: 7.4.33
+-- Хост: 127.0.0.1
+-- Време на генериране:  7 апр 2023 в 04:39
+-- Версия на сървъра: 10.4.27-MariaDB
+-- Версия на PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `customers` (
-  `firstName` varchar(256) CHARACTER SET utf8 NOT NULL,
-  `secondName` varchar(256) CHARACTER SET utf8 NOT NULL,
-  `thridName` varchar(256) CHARACTER SET utf8 NOT NULL,
-  `phone_number` varchar(256) CHARACTER SET utf8 NOT NULL,
-  `fax` varchar(256) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(256) CHARACTER SET utf8 NOT NULL,
-  `address` varchar(256) CHARACTER SET utf8 NOT NULL,
+  `firstName` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `secondName` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `thirdName` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `phone_number` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `fax` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `address` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `age` int(200) NOT NULL,
-  `sex` varchar(256) CHARACTER SET utf8 NOT NULL,
+  `sex` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `id` int(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -45,8 +44,9 @@ CREATE TABLE `customers` (
 -- Схема на данните от таблица `customers`
 --
 
-INSERT INTO `customers` (`firstName`, `secondName`, `thridName`, `phone_number`, `fax`, `email`, `address`, `age`, `sex`, `id`) VALUES
-('First Name', 'Second Name', 'Third Name', 'Phone Number', 'Fax', 'Email', 'Address', 53, 'Sex', 1);
+INSERT INTO `customers` (`firstName`, `secondName`, `thirdName`, `phone_number`, `fax`, `email`, `address`, `age`, `sex`, `id`) VALUES
+('First Name', 'Second Name', 'Third Name', 'Phone Number', 'Fax', 'Email', 'Address', 53, 'Sex', 1),
+('First Name', 'Second Name', 'Third Name', 'Phone Number', 'FAX', 'Email', 'Address', 53, 'Sex', 2);
 
 --
 -- Indexes for dumped tables
