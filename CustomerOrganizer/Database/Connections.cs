@@ -23,9 +23,9 @@ namespace CustomerOrganizer.Database
             public static bool tryConnect()
             {
                 server = "localhost";
-                database = "customer_organizer";
+                database = "vdevsonl_customer_organizer";
                 user = "root";
-                password = "myPass";
+                password = "";
                 port = "3306";
                 sslM = "none";
                 connectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4};", server, port, user, password, database, sslM);

@@ -26,47 +26,48 @@ namespace CustomerOrganizer
         {
             try
             {
-                MySqlCommand insertCustomer = new MySqlCommand($"INSERT INTO customers (firstName, secondName, thridName, phone_number, fax, email, address, age, sex, id) VALUES('" +
-    fName.Text +
-    "','" +
-    sName.Text +
-    "','" +
-    thirdName.Text +
-    "','" +
-    pNum.Text +
-    "','" +
-    faxId.Text +
-    "','" +
-    eMail.Text +
-    "','" +
-    address.Text +
-    "','" +
-    int.Parse(age.Text) +
-    "','" +
-    sex.Text +
-    "','" +
-    getId() +
-    "')", Database.Connections.db.connection);
-                insertCustomer.ExecuteScalar();
+                using (MySqlCommand insertCustomer = new MySqlCommand("INSERT INTO customers (firstName, secondName, thirdName, phone_number, fax, email, address, age, sex, id) VALUES(@firstName, @secondName, @thirdName, @phoneNumber, @fax, @email, @address, @age, @sex, @id)",
+                                                                         Database.Connections.db.connection))
+                {
+                    insertCustomer.Parameters.AddWithValue("@firstName", fName.Text);
+                    insertCustomer.Parameters.AddWithValue("@secondName", sName.Text);
+                    insertCustomer.Parameters.AddWithValue("@thirdName", thirdName.Text);
+                    insertCustomer.Parameters.AddWithValue("@phoneNumber", pNum.Text);
+                    insertCustomer.Parameters.AddWithValue("@fax", faxId.Text);
+                    insertCustomer.Parameters.AddWithValue("@email", eMail.Text);
+                    insertCustomer.Parameters.AddWithValue("@address", address.Text);
+                    insertCustomer.Parameters.AddWithValue("@age", int.Parse(age.Text));
+                    insertCustomer.Parameters.AddWithValue("@sex", sex.Text);
+                    insertCustomer.Parameters.AddWithValue("@id", getId());
+
+                    insertCustomer.ExecuteNonQuery();
+                }
+
                 MessageBox.Show("Successfully inserted customer !", "Customer Organizer");
             }
-            catch (Exception error)
+            catch (MySqlException ex)
             {
-                MessageBox.Show(error.Message,"Error");
+                MessageBox.Show(ex.Message, "Error");
             }
         }
+
         public static int getId()
         {
-            MySqlCommand getId = new MySqlCommand("SELECT COUNT(*) from customers", Database.Connections.db.connection);
-            int totalId = 0;
-            using (MySqlDataReader readId = getId.ExecuteReader())
+            using (MySqlCommand getIdCommand = new MySqlCommand("SELECT COUNT(*) FROM customers", Database.Connections.db.connection))
             {
-                while (readId.Read())
+                int totalId = 0;
+
+                using (MySqlDataReader readId = getIdCommand.ExecuteReader())
                 {
-                    totalId = readId.GetInt32(0);
+                    if (readId.Read())
+                    {
+                        totalId = readId.GetInt32(0);
+                    }
                 }
+
                 return totalId + 1;
             }
         }
+
     }
 }
